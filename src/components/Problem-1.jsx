@@ -6,6 +6,8 @@ const Problem1 = () => {
     const [name, setName] = useState("");
     const [status, setStatus] = useState("");
 
+    const filteredNameStatus = show === 'all' ? nameStatus : nameStatus.filter(item => item.status === show);
+
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
@@ -70,14 +72,13 @@ const Problem1 = () => {
                         </thead>
                         <tbody>
                             {
-                                nameStatus.map((item, index) => (
+                                filteredNameStatus.map((item, index) => (
                                     <tr key={index}>
                                         <td scope="col">{item.name}</td>
                                         <td scope="col">{item.status}</td>
                                     </tr>
                                 ))
                             }
-
                         </tbody>
                     </table>
                 </div>
