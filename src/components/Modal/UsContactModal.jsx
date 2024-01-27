@@ -27,7 +27,10 @@ const UsContactModal = () => {
 
         fetchData();
     }, []);
-    console.log("data", data);
+
+    const usContacts = data?.results.filter((contact) => contact?.country?.name === 'United States');
+    // console.log("usContacts",usContacts)
+    console.log("usContacts", usContacts);
     return (
         <div class="modal fade" id="usContacts" tabindex="-1" aria-labelledby="usContactsLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -37,7 +40,15 @@ const UsContactModal = () => {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        {
+                            usContacts?.map((contact) => (
+                                <div className='d-flex text-decoration-none gap-2'>
+                                    <span>Id: {contact?.country?.id}</span>
+                                    <span>Country: {contact?.country?.name}</span>
+                                    <span>Phone: {contact?.phone}</span>
+                                </div>
+                            ))
+                        }
                     </div>
                     <div className="modal-footer d-flex justify-content-between  ">
                         <div className='d-flex align-items-center gap-1'>

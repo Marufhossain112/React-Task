@@ -6,7 +6,6 @@ const AllContactModal = () => {
 
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
-    const [showOnlyEven, setShowOnlyEven] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -30,8 +29,7 @@ const AllContactModal = () => {
         fetchData();
     }, []);
     // console.log("data", data);
-    console.log("even", showOnlyEven);
-    // const filteredData = showOnlyEven ? data?.results.filter(contact => contact.country.id % 2 === 0) : data?.results;
+
     return (
         <div class="modal fade" id="allContacts" tabindex="-1" aria-labelledby="allContactsLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
