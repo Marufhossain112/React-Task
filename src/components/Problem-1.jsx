@@ -6,7 +6,18 @@ const Problem1 = () => {
     const [name, setName] = useState("");
     const [status, setStatus] = useState("");
 
-    const filteredNameStatus = show === 'all' ? nameStatus : nameStatus.filter(item => item.status === show);
+    const filteredNameStatus = show === 'all' ?
+        nameStatus.sort((a, b) => {
+            const order = ['active', 'completed'];
+            const statusOrderA = order.indexOf(a.status);
+            const statusOrderB = order.indexOf(b.status);
+
+            if (statusOrderA === -1) return 1;
+            if (statusOrderB === -1) return -1;
+
+            return statusOrderA - statusOrderB;
+        }) :
+        nameStatus.filter(item => item.status === show);
 
     const handleNameChange = (e) => {
         setName(e.target.value);
