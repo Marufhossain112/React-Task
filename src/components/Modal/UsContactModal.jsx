@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AllContactModal from './AllContactModal';
+import ContactDetailsModal from './ContactDetailsModal';
 
 const UsContactModal = () => {
     const [data, setData] = useState(null);
@@ -32,7 +33,7 @@ const UsContactModal = () => {
     // console.log("usContacts",usContacts)
     console.log("usContacts", usContacts);
     return (
-        <div class="modal fade" id="usContacts" tabindex="-1" aria-labelledby="usContactsLabel" aria-hidden="true">
+        <><div class="modal fade" id="usContacts" tabindex="-1" aria-labelledby="usContactsLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -42,9 +43,7 @@ const UsContactModal = () => {
                     <div class="modal-body">
                         {
                             usContacts?.map((contact) => (
-                                <div className='d-flex text-decoration-none gap-2'>
-                                    <span>Id: {contact?.country?.id}</span>
-                                    <span>Country: {contact?.country?.name}</span>
+                                <div className='d-flex text-decoration-none gap-2' data-bs-toggle="modal" data-bs-target={`#contactDetailsModal${contact.id}`}>
                                     <span>Phone: {contact?.phone}</span>
                                 </div>
                             ))
@@ -67,6 +66,13 @@ const UsContactModal = () => {
                 </div>
             </div>
         </div>
+
+            {data?.results.map((contact) => (
+                <ContactDetailsModal key={contact.id} contact={contact} />
+            ))}
+
+        </>
+
     );
 };
 

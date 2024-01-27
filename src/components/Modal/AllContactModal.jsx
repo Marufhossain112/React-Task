@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UsContactModal from './UsContactModal';
+import ContactDetailsModal from './ContactDetailsModal';
 
 const AllContactModal = () => {
 
@@ -31,7 +32,7 @@ const AllContactModal = () => {
     // console.log("data", data);
 
     return (
-        <div class="modal fade" id="allContacts" tabindex="-1" aria-labelledby="allContactsLabel" aria-hidden="true">
+        <> <div class="modal fade" id="allContacts" tabindex="-1" aria-labelledby="allContactsLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -41,9 +42,7 @@ const AllContactModal = () => {
                     <div class="modal-body">
                         {
                             data?.results.map((contact) => (
-                                <div className='d-flex text-decoration-none gap-2'>
-                                    <span>Id: {contact?.country?.id}</span>
-                                    <span>Country: {contact?.country?.name}</span>
+                                <div key={contact.id} className='d-flex text-decoration-none gap-2' data-bs-toggle="modal" data-bs-target={`#contactDetailsModal${contact.id}`}>
                                     <span>Phone: {contact?.phone}</span>
                                 </div>
                             ))
@@ -68,6 +67,12 @@ const AllContactModal = () => {
                 </div>
             </div>
         </div>
+
+            {data?.results.map((contact) => (
+                <ContactDetailsModal key={contact.id} contact={contact} />
+            ))}
+        </>
+
     );
 };
 
